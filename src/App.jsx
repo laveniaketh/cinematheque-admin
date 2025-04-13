@@ -13,12 +13,17 @@ import MovieManagement from "./pages/MovieManagement";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<MainLayout />}>
-      <Route index element={<LoginPage />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/ticket-management" element={<TicketManagement />} />
-      <Route path="/movie-management" element={<MovieManagement />} />
-    </Route>
+    <>
+      {/* Login Route outside MainLayout */}
+      <Route path="/" element={<LoginPage />} />
+
+      {/* Routes inside MainLayout (with Sidebar) */}
+      <Route path="/" element={<MainLayout />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="ticket-management" element={<TicketManagement />} />
+        <Route path="movie-management" element={<MovieManagement />} />
+      </Route>
+    </>
   )
 );
 
