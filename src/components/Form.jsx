@@ -24,7 +24,7 @@ const Form = () => {
             label="Username"
             id="username"
             type="text"
-            className="font-medium text-lg dark:bg-[#242424] border-[#AAAAAA] focus:border-white dark:border-[#BBBBBB] dark:focus:border-white peer-focus:text-white dark:focus:text-white dark:text-[#807B7B] peer-focus:dark:text-white"
+            className=" dark:bg-[#242424] border-[#AAAAAA] focus:border-white dark:border-[#BBBBBB] dark:focus:border-white peer-focus:text-white dark:focus:text-white dark:text-[#807B7B] peer-focus:dark:text-white"
           />
         </div>
         <div>
@@ -34,7 +34,7 @@ const Form = () => {
             id="password1"
             type="password"
             required
-            className="font-medium text-lg dark:bg-[#242424] border-[#AAAAAA] focus:border-white dark:border-[#BBBBBB] dark:focus:border-white peer-focus:text-white dark:focus:text-white dark:text-[#807B7B] peer-focus:dark:text-white"
+            className=" dark:bg-[#242424] border-[#AAAAAA] focus:border-white dark:border-[#BBBBBB] dark:focus:border-white peer-focus:text-white dark:focus:text-white dark:text-[#807B7B] peer-focus:dark:text-white"
           />
         </div>
         <div className="flex items-center gap-2">

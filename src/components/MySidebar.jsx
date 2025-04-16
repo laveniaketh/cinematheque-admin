@@ -8,30 +8,31 @@ import {
   SidebarLogo,
 } from "flowbite-react";
 // react component for the image icon
-const dashboardIcon = () => (
-  <img src="/dashboard-icon.png" alt="Dashboard Icon" className="w-5 h-5" />
-);
-const ticketManagementIcon = () => (
-  <img
-    src="/ticket-management-icon.png"
-    alt="Ticket Management Icon"
-    className="w-5 h-5"
-  />
-);
-const movieManagementIcon = () => (
-  <img
-    src="/movie-management-icon.png"
-    alt="Movie Management Icon"
-    className="w-5 h-5"
-  />
-);
-const logoutIcon = () => (
-  <img src="/logout-icon.png" alt="Logout Icon" className="w-5 h-5" />
-);
 
 const MySidebar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const dashboardIcon = () => (
+    <img src="/dashboard-icon.png" alt="Dashboard Icon" className="w-5 h-5" />
+  );
+  const ticketManagementIcon = () => (
+    <img
+      src="/ticket-management-icon.png"
+      alt="Ticket Management Icon"
+      className="w-5 h-5"
+    />
+  );
+  const movieManagementIcon = () => (
+    <img
+      src="/movie-management-icon.png"
+      alt="Movie Management Icon"
+      className="w-5 h-5"
+    />
+  );
+  const logoutIcon = () => (
+    <img src="/logout-icon.png" alt="Logout Icon" className="w-5 h-5" />
+  );
 
   const isActive = (path) =>
     currentPath === path
