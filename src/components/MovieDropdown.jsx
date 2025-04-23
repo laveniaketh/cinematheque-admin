@@ -1,12 +1,31 @@
 import { Dropdown, DropdownItem } from "flowbite-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeProvider } from "flowbite-react";
 
-const StatusDropdown = () => {
-  const [label, setLabel] = useState("Select Current Movie"); // Default label
+const MovieDropdown = ({ onSelectMovie, label, refreshTrigger }) => {
+  const [titles, setTitles] = useState([]); // State to store movie titles
 
-  const handleSelect = (status) => {
-    setLabel(status);
+  const fetchTitles = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/movies/titles");
+      const data = await response.json();
+      if (response.ok) {
+        setTitles(data.titles); // Set movie titles
+      } else {
+        console.error("Failed to fetch movie titles:", data.msg);
+      }
+    } catch (err) {
+      console.error("Error fetching movie titles:", err);
+    }
+  };
+
+  // Fetch titles on mount and when refreshTrigger changes
+  useEffect(() => {
+    fetchTitles();
+  }, [refreshTrigger]);
+
+  const handleSelect = (title) => {
+    onSelectMovie(title); // Pass selected title to parent
   };
 
   const customTheme = {
@@ -48,22 +67,18 @@ const StatusDropdown = () => {
   return (
     <ThemeProvider theme={customTheme}>
       <Dropdown
-        label={label}
+        label={label} // Use dynamic label
         placement="bottom"
         className="b dark:border-2 dark:text-[#6D6C6C] dark:bg-[#282828] dark:hover:bg-[#2C2C2C]  dark:focus:bg-[#2C2C2C] dark:focus:text-white dark:border-[#BBBBBB]  dark:focus:ring-white"
       >
-        <DropdownItem onClick={() => handleSelect("In the Mood for Love")}>
-          In the Mood for Love
-        </DropdownItem>
-        <DropdownItem onClick={() => handleSelect("Fallen Angels")}>
-          Fallen Angels
-        </DropdownItem>
-        <DropdownItem onClick={() => handleSelect("Happy Together")}>
-          Happy Together
-        </DropdownItem>
+        {titles.map((title) => (
+          <DropdownItem key={title} onClick={() => handleSelect(title)}>
+            {title}
+          </DropdownItem>
+        ))}
       </Dropdown>
     </ThemeProvider>
   );
 };
 
-export default StatusDropdown;
+export default MovieDropdown;

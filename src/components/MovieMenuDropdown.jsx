@@ -1,7 +1,13 @@
 import { Dropdown, DropdownItem, DropdownDivider } from "flowbite-react";
 import { ThemeProvider } from "flowbite-react";
 
-const MovieMenuDropdown = () => {
+const MovieMenuDropdown = ({
+  handleSaveNewMovie,
+  handleResetMovie,
+  handleDeleteMovie,
+  handleDeleteAllMovies,
+  handleUpdateMovie,
+}) => {
   const customTheme = {
     dropdown: {
       arrowIcon: "ml-2 h-4 w-4",
@@ -60,10 +66,41 @@ const MovieMenuDropdown = () => {
           </div>
         )}
       >
-        <DropdownItem>Save New Changes</DropdownItem>
-        <DropdownItem>Delete</DropdownItem>
-        <DropdownItem>Delete all Movies</DropdownItem>
-        <DropdownItem>Add new Movie</DropdownItem>
+        <DropdownItem
+          onClick={() => {
+            handleSaveNewMovie();
+          }}
+        >
+          Save New Movie
+        </DropdownItem>
+        <DropdownItem
+          onClick={() => {
+            handleUpdateMovie(); // Call the update movie function
+          }}
+        >
+          Save New Changes
+        </DropdownItem>
+        <DropdownItem
+          onClick={() => {
+            handleDeleteMovie(); // Call the delete function
+          }}
+        >
+          Delete Movie
+        </DropdownItem>
+        <DropdownItem
+          onClick={() => {
+            handleDeleteAllMovies(); // Call the delete all movies function
+          }}
+        >
+          Delete All Movies
+        </DropdownItem>
+        <DropdownItem
+          onClick={() => {
+            handleResetMovie(); // Call the reset function
+          }}
+        >
+          Add New Movie
+        </DropdownItem>
         <DropdownDivider />
         <DropdownItem>Movie Archives</DropdownItem>
       </Dropdown>
