@@ -1,11 +1,6 @@
 import { Pagination, ThemeProvider } from "flowbite-react";
-import { useState } from "react";
 
-const TablePagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const onPageChange = (page) => setCurrentPage(page);
-
+const TablePagination = ({ currentPage, totalPages, onPageChange }) => {
   const customTheme = {
     pagination: {
       base: "",
@@ -40,7 +35,7 @@ const TablePagination = () => {
       <div className="flex overflow-x-auto sm:justify-center">
         <Pagination
           currentPage={currentPage}
-          totalPages={100}
+          totalPages={totalPages}
           onPageChange={onPageChange}
           showIcons
         />

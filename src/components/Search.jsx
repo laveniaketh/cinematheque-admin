@@ -1,4 +1,5 @@
 import { TextInput, ThemeProvider } from "flowbite-react";
+import { useState } from "react";
 import searchIcon from "/search-icon.png";
 
 const SearchIcon = () => (
@@ -29,7 +30,14 @@ const customTheme = {
   },
 };
 
-const Search = () => {
+const Search = ({ onSearch }) => {
+  const [value, setValue] = useState("");
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    if (onSearch) onSearch(e.target.value);
+  };
+
   return (
     <ThemeProvider theme={customTheme}>
       <div className="w-[15rem] ">
@@ -40,6 +48,8 @@ const Search = () => {
           placeholder="Search"
           required
           color="primary"
+          value={value}
+          onChange={handleChange}
         />
       </div>
     </ThemeProvider>

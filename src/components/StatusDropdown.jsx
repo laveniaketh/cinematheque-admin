@@ -2,18 +2,32 @@ import { Dropdown, DropdownItem } from "flowbite-react";
 import { useState } from "react";
 import { ThemeProvider } from "flowbite-react";
 
-const StatusDropdown = () => {
-  const [label, setLabel] = useState("Pending"); // Default label
+const StatusDropdown = ({ ticketID, currentStatus, onStatusChange }) => {
+  const [label, setLabel] = useState(currentStatus);
 
-  const handleSelect = (status) => {
+  const handleSelect = async (status) => {
     setLabel(status);
+    try {
+      const res = await fetch(
+        `http://localhost:8000/api/tickets/${ticketID}/status`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ticketStatus: status }),
+        }
+      );
+      if (res.ok && onStatusChange) {
+        onStatusChange(status);
+      }
+    } catch {
+      // Optionally handle error
+    }
   };
 
   const customTheme = {
     dropdown: {
       arrowIcon: "ml-2 h-4 w-4",
-      content:
-        "py-1 focus:outline-none dark:bg-[#282828] rounded",
+      content: "py-1 focus:outline-none dark:bg-[#282828] rounded",
       floating: {
         animation: "transition-opacity",
         arrow: {

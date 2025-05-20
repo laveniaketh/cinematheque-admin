@@ -2,13 +2,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import { EffectCoverflow, Controller } from "swiper/modules";
-import { Link } from "react-router-dom";
 
 const PosterCarousel = ({
   setSwiperInstance,
   swiperInstance,
   setActiveIndex,
+  movieDetails,
 }) => {
+  const baseURL = "http://localhost:8000"; // Base URL for the backend
+
   return (
     <div className="w-[40rem] px-2 mx-auto">
       <Swiper
@@ -26,35 +28,20 @@ const PosterCarousel = ({
         controller={{ control: swiperInstance }}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         modules={[EffectCoverflow, Controller]}
-        className="h-[22rem]"
+        className="h-[30rem]" // Adjusted height of the Swiper container
       >
-        <SwiperSlide className="!w-[14rem] !h-[20rem] flex justify-center items-center">
-          <Link to="/select-seat">
+        {movieDetails.map((movie, index) => (
+          <SwiperSlide
+            key={index}
+            className="!w-[20rem] !h-[26rem] flex justify-center items-center"
+          >
             <img
-              src="/in the mood for love poster.jpg"
-              alt="slide_image"
-              className="w-[14rem] h-[20rem] rounded-md object-cover border-4 border-white shadow-md shadow-[#2D2D2F]"
+              src={`${baseURL}${movie.posterPath}`}
+              alt={movie.movietitle}
+              className="w-[20rem] h-[26rem] rounded-md object-cover border-4 border-white shadow-md shadow-[#2D2D2F]"
             />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide className="!w-[14rem] !h-[20rem] flex justify-center items-center">
-          <Link to="/select-seat">
-            <img
-              src="/happy together poster.jpg"
-              alt="slide_image"
-              className="w-[14rem] h-[20rem] rounded-md object-cover border-4 border-white shadow-md shadow-[#2D2D2F]"
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide className="!w-[14rem] !h-[20rem] flex justify-center items-center">
-          <Link to="/select-seat">
-            <img
-              src="/fallen angels poster.jpg"
-              alt="slide_image"
-              className="w-[14rem] h-[20rem] rounded-md object-cover border-4 border-white shadow-md shadow-[#2D2D2F]"
-            />
-          </Link>
-        </SwiperSlide>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

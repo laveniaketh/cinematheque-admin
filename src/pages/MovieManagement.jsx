@@ -207,13 +207,17 @@ const MovieManagement = () => {
           label={dropdownLabel}
           refreshTrigger={refreshTrigger} // Pass refresh trigger
         />
-        <MovieMenuDropdown
-          handleSaveNewMovie={handleSubmit}
-          handleResetMovie={handleResetMovie}
-          handleDeleteMovie={handleDeleteMovie}
-          handleDeleteAllMovies={handleDeleteAllMovies}
-          handleUpdateMovie={handleUpdateMovie}
-        />
+
+        <div className="flex flex-row items-center gap-2 ">
+          {message && <p className=" text-sm text-red-500 ">{message}</p>}
+          <MovieMenuDropdown
+            handleSaveNewMovie={handleSubmit}
+            handleResetMovie={handleResetMovie}
+            handleDeleteMovie={handleDeleteMovie}
+            handleDeleteAllMovies={handleDeleteAllMovies}
+            handleUpdateMovie={handleUpdateMovie}
+          />
+        </div>
       </div>
       <PreviewUpload
         setFile={setPreviewFile}
@@ -270,7 +274,6 @@ const MovieManagement = () => {
           onChange={(e) => setSummary(e.target.value)}
         />
       </div>
-      {message && <p className="mt-4 text-sm text-red-500">{message}</p>}
     </form>
   );
 };
